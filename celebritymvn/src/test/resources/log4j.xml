@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- Appenders -->
+	<appender name="consoleAppender" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{dd MMM yyyy HH:mm:ss} - %5p - [%c{1}] - %L - %m%n" />
+		</layout>
+	</appender>
+	
+	<!-- config archivo de log -->
+	<appender name="fileAppender" class="org.apache.log4j.RollingFileAppender">
+		<param name="append" value="true" />
+		
+		<!-- archivo -->
+		<param name="file" value="C:/Logs/celebritymvn_TEST.log" />
+		                           
+        <!-- tamanio archivo-->
+		<param name="MaxFileSize" value="4000KB" />
+		
+		<!-- indice del archivo resplado logBak(20).log-->
+        <param name="MaxBackupIndex" value="20" />
+        
+        <!-- Umbral Nivel DEBUG, INFO, ERROR etc.-->
+        <param name="Threshold" value="ALL" />
+        
+		<!-- patron de escritura del archivo -->
+        <layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{dd MMM yyyy HH:mm:ss} - %5p - [%c{1}] - %L - %m%n" />
+		</layout>
+		
+	</appender>
+    
+    <!-- Logger para Spring -->
+    <logger name="org.springframework" additivity="false">
+        <level value="ALL"/>
+        <appender-ref ref="consoleAppender" />
+        <appender-ref ref="fileAppender" />
+    </logger>
+    
+	<root>
+		<level value="ALL" />
+		<appender-ref ref="consoleAppender" />
+        <appender-ref ref="fileAppender" />
+	</root>
+	
+</log4j:configuration>
